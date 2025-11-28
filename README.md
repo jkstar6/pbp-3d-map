@@ -8,6 +8,7 @@
 -   [Salman Faris - 123230024]
 -   [Reza Rasendriya Adi Putra - 123230030]
 -   [Valentino Abinata - 123230013]
+-   [Rheza Priya Anargya - 123230032]
 
 **Peta Struktur Interaktif & Pemodelan Kontak Fluida**
 

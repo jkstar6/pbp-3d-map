@@ -86,6 +86,11 @@ with st.sidebar:
                     df_upload = pd.read_csv(uploaded_file)
                 else:
                     df_upload = pd.read_excel(uploaded_file)
+                    
+                # Menampilkan preview 5 baris pertama agar user yakin isinya benar
+                st.caption("🔎 Preview data yang kamu upload:")
+                st.dataframe(df_upload.head(), use_container_width=True)
+                
                 # Validasi kolom
                 df_upload.columns = [c.upper() for c in df_upload.columns]
                 required_cols = {'X', 'Y', 'Z'}
