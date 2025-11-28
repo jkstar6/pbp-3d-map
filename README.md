@@ -6,6 +6,7 @@
 
 -   [Muhammad Luqmaan - 123230070]
 -   [Salman Faris - 123230024]
+-   [Reza Rasendriya Adi Putra - 123230030]
 
 **Peta Struktur Interaktif & Pemodelan Kontak Fluida**
 
@@ -13,7 +14,7 @@ Website ini adalah aplikasi berbasis Streamlit yang dirancang untuk visualisasi 
 
 ## Fitur
 
--   **Input Data Interaktif**: Tambahkan titik koordinat (X, Y, Z) dengan mudah melalui sidebar.
+-   **Input Data Fleksibel**: Tambahkan titik manual via sidebar atau **Upload File CSV/Excel** untuk dataset besar.
 -   **Pemetaan Kontur 2D**: Visualisasikan struktur reservoir dengan garis kontur 2D dan zona fluida (Gas Cap, Oil Zone, Aquifer).
 -   **Pemodelan Permukaan 3D**: Jelajahi reservoir dalam 3D dengan permukaan medan dan bidang GOC/WOC yang dapat disesuaikan.
 -   **Kontrol Kontak Fluida**: Sesuaikan level Gas-Oil Contact (GOC) dan Water-Oil Contact (WOC) secara dinamis.
@@ -41,8 +42,9 @@ Website ini adalah aplikasi berbasis Streamlit yang dirancang untuk visualisasi 
     ```
 
 2.  **Input Data**:
-    -   Gunakan panel **Input Koordinat** di sidebar untuk menambahkan titik.
-    -   Atau, buka **Pengaturan Data** dan klik **Load Data Demo**.
+    -   **Opsi A (Manual)**: Gunakan panel **Input Manual** untuk menambahkan titik satu per satu.
+    -   **Opsi B (Upload)**: Buka panel **Manajemen File**, upload file `.csv` atau `.xlsx` (wajib kolom X, Y, Z), lalu klik "Muat Data".
+    -   **Opsi C (Demo)**: Buka panel **Reset & Demo** dan klik **Load Data Demo Internal**.
 
 3.  **Eksplorasi**:
     -   Pindah antara tab **Peta Kontur 2D**, **Model 3D**, dan **Data Mentah** untuk melihat visualisasi yang berbeda.

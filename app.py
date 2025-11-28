@@ -28,7 +28,6 @@ if 'data_points' not in st.session_state:
 # --- 2. SIDEBAR KEREN ---
 with st.sidebar:
     st.header("🛠️ Panel Input")
-    
     # --- BAGIAN A: INPUT DATA ---
     st.markdown("### 📍 Input Koordinat")
     
@@ -75,9 +74,35 @@ with st.sidebar:
         
         if goc_input > woc_input:
             st.warning("⚠️ Awas: GOC > WOC!")
+    
+    st.markdown("---")
+        # upload file
+    with st.expander("📂 Upload File", expanded=True):
+        uploaded_file = st.file_uploader("Upload CSV/Excel (Wajib: X, Y, Z)", type=["csv", "xlsx"])
+        
+        if uploaded_file is not None:
+            try:
+                if uploaded_file.name.endswith('.csv'):
+                    df_upload = pd.read_csv(uploaded_file)
+                else:
+                    df_upload = pd.read_excel(uploaded_file)
+                # Validasi kolom
+                df_upload.columns = [c.upper() for c in df_upload.columns]
+                required_cols = {'X', 'Y', 'Z'}
+                
+                if required_cols.issubset(df_upload.columns):
+                    st.success(f"File valid! {len(df_upload)} baris data.")
+                    if st.button("📥 Muat Data ke Aplikasi", type="primary"):
+                        new_data = df_upload[['X', 'Y', 'Z']].to_dict('records')
+                        st.session_state['data_points'].extend(new_data)
+                        st.toast(f"Berhasil menambahkan {len(new_data)} titik!", icon='✅')
+                        st.rerun() 
+                else:
+                    st.error(f"Format salah! File harus punya kolom: {required_cols}")
+            except Exception as e:
+                st.error(f"Error membaca file: {e}")
 
     # --- BAGIAN D: UTILITAS (Disembunyikan di Expander) ---
-    st.markdown("---")
     with st.expander("⚙️ Pengaturan Data", expanded=False):
         if st.button("🔄 Reset Semua Data"):
             st.session_state['data_points'] = []
@@ -103,14 +128,15 @@ else:
     # --- PROSES GRIDDATA (Interpolasi) ---
     # Minimal 4 titik untuk kontur yang baik
     if len(df) >= 4:
+        df_unique = df.groupby(['X', 'Y'], as_index=False)['Z'].mean()
         grid_x = np.linspace(df['X'].min(), df['X'].max(), 100)
         grid_y = np.linspace(df['Y'].min(), df['Y'].max(), 100)
         grid_x, grid_y = np.meshgrid(grid_x, grid_y)
 
         try:
-            grid_z = griddata((df['X'], df['Y']), df['Z'], (grid_x, grid_y), method='cubic')
+            grid_z = griddata((df_unique['X'], df_unique['Y']), df_unique['Z'], (grid_x, grid_y), method='cubic')
         except:
-            grid_z = griddata((df['X'], df['Y']), df['Z'], (grid_x, grid_y), method='linear')
+            grid_z = griddata((df_unique['X'], df_unique['Y']), df_unique['Z'], (grid_x, grid_y), method='linear')
 
         # --- TABS VISUALISASI ---
         tab1, tab2, tab3 = st.tabs(["🗺️ Peta Kontur 2D", "🧊 Model 3D", "📋 Data Mentah"])
