@@ -1,4 +1,4 @@
-# GeoViz Pro - Visualisasi Reservoir 3D
+# Visualisasi Reservoir 3D
 
 **Tugas Pemetaan Bawah Permukaan IF-A**
 
