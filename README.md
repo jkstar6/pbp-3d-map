@@ -7,7 +7,7 @@
 -   [Muhammad Luqmaan - 123230070]
 -   [Salman Faris - 123230024]
 -   [Reza Rasendriya Adi Putra - 123230030]
--   [Muhammad Luqmaan - 123230013]
+-   [Valentino Abinata - 123230013]
 
 **Peta Struktur Interaktif & Pemodelan Kontak Fluida**
 
